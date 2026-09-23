@@ -1,7 +1,7 @@
 package cartes;
 
 public class JeuDeCartes {
-	private Configuration[] typesDeCartes ;
+	private Configuration[] typesDeCartes = {new ;
 	
 	public String affichageJeuDeCartes() {
 		StringBuilder message = new StringBuilder();
