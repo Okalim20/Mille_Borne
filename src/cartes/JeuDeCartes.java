@@ -67,6 +67,11 @@ public class JeuDeCartes {
 		public int getNbExemplaires() {
 			return nbExemplaires;
 		}
+
+		@Override
+		public String toString() {
+			return carte.toString();
+		}
 		
 		
 	}
