@@ -17,7 +17,6 @@ public class TestGestionCartes {
 		}
 		
 		List<Carte> listeCartes = new ArrayList<>(listeCarteNonMelangee);
-		System.out.println(GestionCartes.extraire(listeCarteNonMelangee).toString());
 
 //		System.out.println(listeCartes);
 //		listeCartes = GestionCartes.melanger(listeCartes);
