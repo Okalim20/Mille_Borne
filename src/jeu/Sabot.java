@@ -6,27 +6,26 @@ import java.util.NoSuchElementException;
 
 import cartes.Carte;
 
-public class Sabot implements Iterable<Carte>{
+public class Sabot implements Iterable<Carte> {
 
 	private Carte[] cartes;
 	private int nbCartes;
-	private int nombreOperations=0;
-	
+	private int nombreOperations = 0;
+
 	public Sabot(Carte[] cartes) {
-		this.cartes=cartes;
-		this.nbCartes=cartes.length;
+		this.cartes = cartes;
+		this.nbCartes = cartes.length;
 	}
-	
+
 	public boolean estVide() {
-		return nbCartes==0;
+		return nbCartes == 0;
 	}
-	
+
 	public void ajouterCarte(Carte carte) {
-		if(nbCartes>=cartes.length) {
+		if (nbCartes >= cartes.length) {
 			throw new IllegalStateException();
-		}
-		else {
-			cartes[nbCartes]=carte;
+		} else {
+			cartes[nbCartes] = carte;
 			nbCartes++;
 			nombreOperations++;
 		}
@@ -38,25 +37,23 @@ public class Sabot implements Iterable<Carte>{
 		iter.remove();
 		return carte;
 	}
-	
 
 	@Override
 	public Iterator<Carte> iterator() {
 		return new Iterateur();
 	}
-				
-	private class Iterateur implements Iterator<Carte>{
-		private int iteratorPosition=0;
-		private boolean nextEffectue=false;
-		private int nombreOperationsReference=nombreOperations;
-		
-		
+
+	private class Iterateur implements Iterator<Carte> {
+		private int iteratorPosition = 0;
+		private boolean nextEffectue = false;
+		private int nombreOperationsReference = nombreOperations;
+
 		private void verificationConcurrence() {
-			if(nombreOperations!=nombreOperationsReference) {
+			if (nombreOperations != nombreOperationsReference) {
 				throw new ConcurrentModificationException();
 			}
 		}
-		
+
 		@Override
 		public boolean hasNext() {
 			return nbCartes > iteratorPosition;
@@ -67,28 +64,27 @@ public class Sabot implements Iterable<Carte>{
 			verificationConcurrence();
 			if (hasNext()) {
 				iteratorPosition++;
-				nextEffectue=true;
-				return cartes[iteratorPosition-1];
-			}
-			else {
+				nextEffectue = true;
+				return cartes[iteratorPosition - 1];
+			} else {
 				throw new NoSuchElementException();
 			}
 		}
-		
+
 		@Override
 		public void remove() {
 			verificationConcurrence();
-			if (nbCartes<1 || !nextEffectue) {
+			if (nbCartes < 1 || !nextEffectue) {
 				throw new IllegalStateException();
 			}
-			for(int i = iteratorPosition-1; i<nbCartes-1;i++) {
-				cartes[i]=cartes[i+1];
+			for (int i = iteratorPosition - 1; i < nbCartes - 1; i++) {
+				cartes[i] = cartes[i + 1];
 			}
 			iteratorPosition--;
-			nextEffectue=false;
+			nextEffectue = false;
 			nbCartes--;
-			nombreOperations++;nombreOperationsReference++;
+			nombreOperations++;
+			nombreOperationsReference++;
 		}
 	}
 }
-
