@@ -14,18 +14,19 @@ public class TestGestionCartes {
 		List<Carte> listeCarteNonMelangee = new LinkedList<>();
 		for (Carte carte : jeu.donnerCartes()) {
 			listeCarteNonMelangee.add(carte);
-		}
-		
-		List<Carte> listeCartes = new ArrayList<>(listeCarteNonMelangee);
 
-//		System.out.println(listeCartes);
-//		listeCartes = GestionCartes.melanger(listeCartes);
-//		System.out.println(listeCartes);
-//		System.out.println(
-//				"liste m�lang�e sans erreur ? " + GestionCartes.verifierMelange(listeCarteNonMelangee, listeCartes));
-//		listeCartes = GestionCartes.rassemberV2(listeCartes);
-//		System.out.println(listeCartes);
-//		System.out.println("liste rassembl�e sans erreur ? " + GestionCartes.verifierRassemblement(listeCartes));
+		}
+		List<Carte> listeCartes = new ArrayList<>(listeCarteNonMelangee);
+		System.out.println(listeCartes);
+		listeCartes = GestionCartes.melanger(listeCartes);
+		System.out.println(listeCartes);
+		GestionCartes.aux(listeCarteNonMelangee, listeCarteNonMelangee.get(0));
+		System.out.println(
+				"liste m�lang�e sans erreur ? " + GestionCartes.verifierMelange(listeCarteNonMelangee, listeCartes));
+		listeCartes = GestionCartes.rassembler(listeCartes);
+		System.out.println(listeCartes);
+		System.out.println(listeCartes.size());
+		System.out.println("liste rassembl�e sans erreur ? " + GestionCartes.verifierRassemblement(listeCartes));
 
 	}
 

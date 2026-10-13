@@ -5,6 +5,7 @@ import cartes.Borne;
 import cartes.Carte;
 import cartes.DebutLimite;
 import cartes.FinLimite;
+import cartes.Limite;
 import cartes.Parade;
 import cartes.Type;
 
@@ -20,7 +21,6 @@ public class TestMethodeEquals {
 		
 		Carte carteFeuxVert = new Parade(Type.FEU);
 		System.out.println("La carte feu rouge et la carte feu vert sont identiques ? " + carteFeuxRouge1.equals(carteFeuxVert));
-	
 
 	}
 }

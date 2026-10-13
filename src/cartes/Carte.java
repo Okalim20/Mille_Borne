@@ -7,6 +7,6 @@ public abstract class Carte {
 		if(obj instanceof Carte carte) {
 			return this.getClass()==carte.getClass();
 		}
-		return super.equals(obj);
+		return false;
 	}
 }

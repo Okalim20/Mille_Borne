@@ -7,8 +7,10 @@ public class JeuDeCartes {
 			new Configuration(new Borne(50), 10), new Configuration(new Borne(75), 10),
 			new Configuration(new Borne(100), 12), new Configuration(new Borne(200), 4),
 			new Configuration(new Parade(Type.FEU), 14), new Configuration(new FinLimite(), 6),
-			new Configuration(new Parade(Type.CREVAISON), 6), new Configuration(new Parade(Type.ACCIDENT), 6),
-			new Configuration(new Attaque(Type.FEU), 5), new Configuration(new DebutLimite(), 50),
+			new Configuration(new Parade(Type.CREVAISON), 6),
+			new Configuration(new Parade(Type.ACCIDENT), 6),
+			new Configuration(new Parade(Type.ESSENCE),6),
+			new Configuration(new Attaque(Type.FEU), 5), new Configuration(new DebutLimite(), 4),
 			new Configuration(new Attaque(Type.ESSENCE), 3), new Configuration(new Attaque(Type.ACCIDENT), 3),
 			new Configuration(new Attaque(Type.CREVAISON), 3), new Configuration(new Botte(Type.FEU), 1),
 			new Configuration(new Botte(Type.ESSENCE), 1), new Configuration(new Botte(Type.CREVAISON), 1),
@@ -33,21 +35,26 @@ public class JeuDeCartes {
 		for (int i = 0, posTabCartes = 0; i < typesDeCartes.length; i++) {
 
 			for (int j = 0; j < typesDeCartes[i].nbExemplaires; j++) {
-				tabCartes[posTabCartes] = typesDeCartes[i];
+				tabCartes[posTabCartes] = typesDeCartes[i].carte;
 				posTabCartes++;
 			}
 		}
 		return tabCartes;
 	}
+	
 
 	public boolean checkCount() {
 		Carte[] cartes=donnerCartes();
-		int i = 0;
+		int compteur = 0;
 		for(Configuration configuration : typesDeCartes) {
-			if(!configuration.equals(cartes[i])) {
-				return false;
+			int nbExemplaires = configuration.getNbExemplaires();
+			for(int i = 0;i<nbExemplaires;i++) {
+				if(!configuration.equals(cartes[compteur+i])) {
+					return false;
+				}
 			}
-			i+=configuration.nbExemplaires;
+			compteur+=nbExemplaires;
+
 		}
 		return true;
 	}
@@ -72,6 +79,7 @@ public class JeuDeCartes {
 		public String toString() {
 			return carte.toString();
 		}
+		
 
 	}
 }
