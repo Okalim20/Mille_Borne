@@ -20,7 +20,6 @@ public class TestGestionCartes {
 		System.out.println(listeCartes);
 		listeCartes = GestionCartes.melanger(listeCartes);
 		System.out.println(listeCartes);
-		GestionCartes.aux(listeCarteNonMelangee, listeCarteNonMelangee.get(0));
 		System.out.println(
 				"liste m�lang�e sans erreur ? " + GestionCartes.verifierMelange(listeCarteNonMelangee, listeCartes));
 		listeCartes = GestionCartes.rassembler(listeCartes);

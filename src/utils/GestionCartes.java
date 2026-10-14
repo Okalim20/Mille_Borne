@@ -11,6 +11,11 @@ import java.util.Random;
 import cartes.Carte;
 
 public class GestionCartes {
+	
+	 private GestionCartes() {
+	   /* This utility class should not be instantiated */
+	 }
+
 	private static Random random = new Random();
 	
 	public static Carte extraire(List<Carte> liste) {
@@ -38,23 +43,15 @@ public class GestionCartes {
 		
 	}
 	
-	public static void aux(List<Carte> liste1, Carte carte) {
-		int i =0;
-		System.out.println(carte.getClass());
-		for(ListIterator<Carte> iter = liste1.listIterator();iter.hasNext();) {
-			Carte c = iter.next();
-			if(c.equals(carte)) {
-				i++;
-			}
-		}
-		System.out.println("I = "+i);
-		
-	}
+
 	public static boolean verifierMelange(List<Carte> liste1, List<Carte> liste2) {
+		
+		if(liste1.size()!=liste2.size()) {
+			return false;
+		}
 		for(ListIterator<Carte> iter = liste1.listIterator();iter.hasNext();) {
 			Carte carte = iter.next();
 			
-			//System.out.println("Fréquence "+carte.toString()+ " 1 :"+Collections.frequency(liste1,carte)+" 2 : "+Collections.frequency(liste2,carte));
 			if(Collections.frequency(liste1,carte)!=Collections.frequency(liste2, carte)) {
 				return false;
 			}
@@ -80,27 +77,32 @@ public class GestionCartes {
 
 	}
 	
+	private static boolean verifierDuplicata(Carte carte, List<Carte> liste) {
+		for (ListIterator<Carte> iter = liste.listIterator(liste.indexOf(carte)); iter.hasNext();) {
+			Carte duplicata = iter.next();
+			if(duplicata.equals(carte)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static boolean verifierRassemblement(List<Carte> liste) {
 		if(liste.size()==1) {
 			return true;
 		}
+		boolean bienRassemble = true;
 		Carte precedent = liste.get(0);
 		for(ListIterator<Carte> iter1 = liste.listIterator(1);iter1.hasNext();) {
 			Carte carte = iter1.next();
 
 			if(carte!=precedent) {
-				for (ListIterator<Carte> iter2 = liste.listIterator(liste.indexOf(carte)); iter2.hasNext();) {
-					Carte duplicata = iter2.next();
-					if(duplicata.equals(precedent)) {
-						return false;
-					}
-					
-				}
+				bienRassemble = bienRassemble && verifierDuplicata(precedent, liste);
 			}
 			
 			precedent=carte;
 		}
-		return true;
+		return bienRassemble;
 	}
 	
 }

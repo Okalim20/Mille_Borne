@@ -4,9 +4,11 @@ public abstract class Carte {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Carte carte) {
-			return this.getClass()==carte.getClass();
-		}
-		return false;
+		return obj!=null && obj.getClass()==getClass();
+	}
+	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 }
